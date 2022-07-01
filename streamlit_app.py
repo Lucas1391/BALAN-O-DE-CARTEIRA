@@ -3,6 +3,32 @@ import pandas as pd
 import streamlit as st
 import yfinance as yf
 
+#Carregando Logomarca
+image = Image.open("IMAGE.png")
+#Abrindo logomarca no Streamlit
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.write("")
+
+with col2:
+    st.image(image)
+
+with col3:
+    st.write("")
+    
+#Iniciando APP
+st.markdown("<h1 style='text-align: center; color: red;'>APLICATIVO GRÁFICO TRADER OBJETIVO</h1>",unsafe_allow_html=True)
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+
+CAPITAL = st.number_input('Digite o valor de seu aporte')
 def Main():
     IVVB11 = yf.download("IVVB11.SA",period="10y")
     PRECO_IVVB11 = IVVB11["Close"].iloc[-1]
@@ -17,7 +43,6 @@ def Main():
     GOLD11 = yf.download("GOLD11.SA",period="1d")
     BOVA11 = yf.download("BOVA11.SA",period="1d")
     COLUNAS = ["Topo Historico","Cotação Atual","Relativo","Ajustado","Percentual",]
-    CAPITAL = 7500.00
     DADOS = pd.DataFrame(columns=COLUNAS)
     DADOS["Topo Historico"] = [BOVESPA_HIGH,IVVB11_HIGH,GOLD_HIGH]
     DADOS.index = ["IBOV","IVVB11","GOLD"]
@@ -32,4 +57,4 @@ def Main():
     DADOS['Percentual'] = (25.00 + DADOS['Ajustado']/4.00)/(100.00)
     DADOS['Valor por ativo'] = CAPITAL*DADOS['Percentual']
     return DADOS
-  st.
+  
