@@ -15,7 +15,7 @@ col1, col2, col3 = st.columns(3)
     #st.write("")
 
 #with col2:
-st.image(image,width = 600,use_column_width=False)
+st.image(image,width = 700,use_column_width=False)
     
 #with col3:
  #   st.write("")
