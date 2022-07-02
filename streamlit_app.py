@@ -2,7 +2,6 @@ from PIL import Image
 import pandas as pd
 import streamlit as st
 import yfinance as yf
-import base64
 
 #Carregando Logomarca
 image = Image.open("IMAGE.png")
@@ -16,36 +15,8 @@ with col1:
     st.write("")
 
 with col2:
-    st.markdown(
-    """
-    <style>
-    .container {
-        display: flex;
-    }
-    .logo-text {
-        font-weight:700 !important;
-        font-size:50px !important;
-        color: #f9a01b !important;
-        padding-top: 75px !important;
-    }
-    .logo-img {
-        float:right;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-    )
-
-    st.markdown(
-    f"""
-    <div class="container">
-        <img class="logo-img" src="data:image/png;base64,{base64.b64encode(open(image, "rb").read()).decode()}">
-        <p class="logo-text">Logo Much ?</p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
+    st.markdown(image)
+    
 with col3:
     st.write("")
     
