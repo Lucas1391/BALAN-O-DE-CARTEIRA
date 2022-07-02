@@ -21,7 +21,7 @@ with col3:
     st.write("")
     
 #Iniciando APP
-st.markdown("<h1 style='text-align: center; color: red;'>APLICATIVO GRÁFICO TRADER OBJETIVO</h1>",unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: red;'>ALOCAÇÃO DE ATIVOS</h1>",unsafe_allow_html=True)
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
