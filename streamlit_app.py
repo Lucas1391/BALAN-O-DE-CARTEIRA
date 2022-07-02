@@ -15,7 +15,7 @@ with col1:
     st.write("")
 
 with col2:
-    st.markdown(image)
+    st.image(image)
     
 with col3:
     st.write("")
