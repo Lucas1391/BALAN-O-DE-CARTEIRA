@@ -57,4 +57,8 @@ def Main():
     DADOS['Percentual'] = (25.00 + DADOS['Ajustado']/4.00)/(100.00)
     DADOS['Valor por ativo'] = CAPITAL*DADOS['Percentual']
     return DADOS
+if CAPITAL : 
+    resultado = Main()
+    st.write("Tabela de Alocação de ativos")
+    st.dataframe(resultado) 
   
