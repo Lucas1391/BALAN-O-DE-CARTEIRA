@@ -4,9 +4,8 @@ import streamlit as st
 import yfinance as yf
 
 #Carregando Logomarca
-image_path = "image_name.jpg"
-image_file = Image.open(image_path) 
-image_file.save("image_name.jpg", quality=95)
+image_path = "IMAGE.jpg"
+Imagem = Image.open(image_path)
 #Abrindo logomarca no Streamlit
 
 col1, col2, col3 = st.columns(3)
