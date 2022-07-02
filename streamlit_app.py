@@ -11,14 +11,14 @@ image = Image.open("IMAGE.png")
 
 col1, col2, col3 = st.columns(3)
 
-with col1:
-    st.write("")
+#with col1:
+    #st.write("")
 
-with col2:
-    st.image(image,width = 400,use_column_width=False)
+#with col2:
+st.image(image,width = 400,use_column_width=False)
     
-with col3:
-    st.write("")
+#with col3:
+ #   st.write("")
     
 #Iniciando APP
 st.markdown("<h1 style='text-align: center; color: red;'>ALOCAÇÃO DE ATIVOS</h1>",unsafe_allow_html=True)
