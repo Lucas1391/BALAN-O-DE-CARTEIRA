@@ -35,10 +35,10 @@ def Main():
     IVVB11 = yf.download("IVVB11.SA",period="10y")
     PRECO_IVVB11 = IVVB11["Close"].iloc[-1]
     IVVB11_HIGH = IVVB11['High'].max()
-    GOLD = yf.download("GC=F",period="10y")
+    GOLD = yf.download("GOLD11.SA",period="10y")
     PRECO_GOLD = GOLD["Close"].iloc[-1]
     GOLD_HIGH = GOLD['High'].max()
-    BOVESPA = yf.download("^BVSP",period ="10y")
+    BOVESPA = yf.download("BOVA11.SA",period ="10y")
     BOVESPA_HIGH = BOVESPA['High'].max()
     PRECO_BOVESPA = BOVESPA["Close"].iloc[-1]
     BOVESPA_HIGH = BOVESPA['High'].max()
