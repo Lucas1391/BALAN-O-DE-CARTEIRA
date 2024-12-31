@@ -3,7 +3,7 @@ import yfinance as yf
 import pandas as pd
 import streamlit as st
 
-# Função para tentar baixar dados e repetir caso haja erro
+# Função para tentar baixar dados com retries em caso de erro
 def fetch_data(ticker, period="1y", retries=3, delay=5):
     """
     Função para baixar dados com retry em caso de erro.
@@ -27,7 +27,8 @@ def fetch_data(ticker, period="1y", retries=3, delay=5):
     return None
 
 # Função principal do aplicativo
-def Main():
+def Main(CAPITAL):
+    # Baixando dados dos ativos
     IVVB11 = fetch_data("IVVB11.SA", period="10y")
     if IVVB11 is None:
         return None
@@ -46,6 +47,7 @@ def Main():
     PRECO_BOVESPA = BOVESPA["Close"].iloc[-1] if not BOVESPA["Close"].empty else 0
     BOVESPA_HIGH = BOVESPA['High'].max() if not BOVESPA['High'].empty else 0
 
+    # Criando DataFrame para armazenar os dados
     COLUNAS = ["Topo Historico", "Cotação Atual", "Relativo", "Ajustado", "Percentual"]
     DADOS = pd.DataFrame(columns=COLUNAS)
     
@@ -53,20 +55,35 @@ def Main():
     DADOS.index = ["IBOV", "IVVB11", "GOLD"]
     DADOS['Cotação Atual'] = [PRECO_BOVESPA, PRECO_IVVB11, PRECO_GOLD]
     
+    # Calculando o fator e a amplitude
     FATOR = 0.60 * DADOS["Topo Historico"]
     AMPLITUDE = DADOS["Topo Historico"] - DADOS['Cotação Atual']
     DADOS['Relativo'] = AMPLITUDE / FATOR
     DADOS.iloc[2, 2] = 2 * DADOS.iloc[2, 2]  # Ajuste específico para GOLD
     SOMA = DADOS['Relativo'].sum()
     
+    # Calculando o valor ajustado e percentual
     DADOS['Ajustado'] = 100 * (DADOS['Relativo'] / SOMA)
     DADOS['Percentual'] = (25.00 + DADOS['Ajustado'] / 4.00) / 100.00
     DADOS['Valor por ativo'] = CAPITAL * DADOS['Percentual']
     
     return DADOS
 
-if CAPITAL:
-    resultado = Main()
+# Código de interface do usuário com Streamlit
+st.markdown("<h1 style='text-align: center; color: red;'>ALOCAÇÃO DE ATIVOS</h1>", unsafe_allow_html=True)
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+# Capturando o valor do capital do usuário
+CAPITAL = st.number_input('Digite o valor de seu aporte')
+
+if CAPITAL > 0:
+    resultado = Main(CAPITAL)
     if resultado is not None:
         st.write("Tabela de Alocação de ativos")
         st.dataframe(resultado)
