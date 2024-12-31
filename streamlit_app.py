@@ -44,7 +44,7 @@ def Main():
     BOVESPA_HIGH = BOVESPA['High'].max()
     GOLD11 = yf.download("GOLD11.SA",period="1d")
     BOVA11 = yf.download("BOVA11.SA",period="1d")
-    COLUNAS = ["Topo Historico","Cotação Atual","Relativo","Ajustado","Percentual",]
+    COLUNAS = ["Topo Historico","Cotação Atual","Relativo","Ajustado","Percentual"]
     DADOS = pd.DataFrame(columns=COLUNAS)
     DADOS["Topo Historico"] = [BOVESPA_HIGH,IVVB11_HIGH,GOLD_HIGH]
     DADOS.index = ["IBOV","IVVB11","GOLD"]
